@@ -46,11 +46,11 @@ describe('motion audio contract isolation', () => {
 
 describe('motion player notices', () => {
   const video = '<meta name="od-motion-output" content="video"><div data-composition-id="main"></div>';
-  it('shows English notices unless the browser language is Chinese', () => {
+  it('ships English notices with Chinese only as a locale variant', () => {
     const result = injectMotionSourcePlayer(video);
     expect(result).toContain('Motion is not ready. Check the timeline or its dependency files.');
     expect(result).toContain('Click the video to turn on sound');
-    expect(result).toContain('notice(MESSAGES.notReady)');
+    expect(result).toContain("say('notReady')");
     expect(result).not.toContain("notice('动效未就绪");
   });
   it('upgrades a v6 player that still hardcodes Chinese notices', () => {
