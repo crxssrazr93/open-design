@@ -822,8 +822,8 @@ export function DesignsTab({
 						const ds = dsName(resolveProjectDesignSystemId(p));
 						if (item.type === "live-artifact") {
 							const artifact = item.liveArtifact;
-							const title = liveArtifactCardTitle(p, artifact);
-							const metaLead = liveArtifactCardMetaLead(p, artifact);
+							const title = liveArtifactCardTitle(p, artifact, t);
+							const metaLead = liveArtifactCardMetaLead(p, artifact, t);
 							return (
 								<div
 									key={`live:${artifact.id}`}
@@ -1336,12 +1336,20 @@ function shouldHideProjectCard(project: Project, liveArtifacts: LiveArtifactSumm
   return project.skillId === 'live-artifact' && isOrbitProject(project);
 }
 
-function liveArtifactCardTitle(project: Project, liveArtifact: LiveArtifactSummary): string {
-  return isCollapsedOrbitArtifactProject(project) ? project.name : liveArtifact.title;
+function liveArtifactCardTitle(
+  project: Project,
+  liveArtifact: LiveArtifactSummary,
+  t: ReturnType<typeof useT>,
+): string {
+  return isCollapsedOrbitArtifactProject(project) ? displayProjectName(project.name, t) : liveArtifact.title;
 }
 
-function liveArtifactCardMetaLead(project: Project, liveArtifact: LiveArtifactSummary): string {
-  return isCollapsedOrbitArtifactProject(project) ? liveArtifact.title : project.name;
+function liveArtifactCardMetaLead(
+  project: Project,
+  liveArtifact: LiveArtifactSummary,
+  t: ReturnType<typeof useT>,
+): string {
+  return isCollapsedOrbitArtifactProject(project) ? liveArtifact.title : displayProjectName(project.name, t);
 }
 
 function isCollapsedOrbitArtifactProject(project: Project): boolean {

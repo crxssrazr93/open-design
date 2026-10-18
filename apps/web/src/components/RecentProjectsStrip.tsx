@@ -1728,7 +1728,7 @@ export function RecentProjectsStrip({
                 </div>
                 <div className="recent-projects__card-meta">
                   <div className="recent-projects__card-name-row">
-                    <span className="recent-projects__card-name">{project.name}</span>
+                    <span className="recent-projects__card-name">{displayProjectName(project.name, t)}</span>
                     {shared && view === 'list' ? (
                       <span className="recent-projects__card-badge recent-projects__card-badge--shared recent-projects__card-badge--inline">
                         <Icon name="swap" size={13} />
